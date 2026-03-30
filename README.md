@@ -1,6 +1,6 @@
 # AI Identity Gateway — Blog Example
 
-A stripped-down, self-contained example of the Maverics AI Identity Gateway protecting MCP servers with OAuth 2.0 identity governance. One command to start. Connect Claude in 60 seconds.
+A self-contained example of the Maverics AI Identity Gateway protecting MCP servers with OAuth 2.0 identity governance. One command to start. Connect Claude in 60 seconds.
 
 Companion to: [Your MCP Server Is a Resource Server Now. Act Like It.](../blog.md)
 
