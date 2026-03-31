@@ -8,6 +8,10 @@ Companion to: [Your MCP Server Is a Resource Server Now. Act Like It.](../blog.m
 
 - Docker Desktop (or Docker Engine + Compose v2)
 - [mkcert](https://github.com/FiloSottile/mkcert) — local TLS certificate generation
+- [Node.js](https://nodejs.org/) — required for `mcp-remote` (Claude Desktop connection)
+  ```bash
+  brew install node    # macOS
+  ```
 - Maverics Orchestrator image from [Strata](https://www.strata.io/) (loaded via `docker load`)
 
 ## Quick Start
