@@ -29,12 +29,34 @@ make smoke-test
 
 ## Connect Claude Code
 
+If you use Claude Code, add the example MCP using the following command:
+
 ```bash
 claude mcp add --transport http \
   --client-id mcp-client-cli \
   --callback-port 19876 \
   ai-identity-gateway \
   https://gateway.orchestrator.lab/mcp
+```
+
+If you use claude desktop, add the MCP to the local configuration using this command instead:
+
+```bash
+cat > "/Users/nickgamb/Library/Application Support/Claude/claude_desktop_config.json" << 'EOF'
+{
+  "preferences": {
+    "coworkScheduledTasksEnabled": true,
+    "ccdScheduledTasksEnabled": true,
+    "sidebarMode": "code",
+    "coworkWebSearchEnabled": true
+  },
+  "mcpServers": {
+    "ai-identity-gateway": {
+      "type": "http",
+      "url": "https://gateway.orchestrator.lab/mcp",
+      "clientId": "mcp-client-cli",
+      "callbackPort": 19876
+    }
 ```
 
 When prompted, authenticate as one of the test users below.
