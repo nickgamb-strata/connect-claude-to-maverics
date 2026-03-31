@@ -54,7 +54,7 @@ Then add the following to the `mcpServers` object:
 {
   "mcpServers": {
     "ai-identity-gateway": {
-      "command": "npx",
+      "command": "/opt/homebrew/bin/npx",
       "args": [
         "mcp-remote",
         "https://gateway.orchestrator.lab/mcp",
