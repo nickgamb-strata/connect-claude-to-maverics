@@ -39,30 +39,37 @@ claude mcp add --transport http \
   https://gateway.orchestrator.lab/mcp
 ```
 
-If you use claude desktop, add the MCP to the local configuration using this command instead:
+If you use Claude Desktop, add the MCP gateway using `mcp-remote`. First, open your config file:
 
-```bash
-cat > "/Users/nickgamb/Library/Application Support/Claude/claude_desktop_config.json" << 'EOF'
+**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+Then add the following to the `mcpServers` object:
+
+```json
 {
-  "preferences": {
-    "coworkScheduledTasksEnabled": true,
-    "ccdScheduledTasksEnabled": true,
-    "sidebarMode": "code",
-    "coworkWebSearchEnabled": true
-  },
   "mcpServers": {
     "ai-identity-gateway": {
-      "type": "http",
-      "url": "https://gateway.orchestrator.lab/mcp",
-      "oauth": {
-        "clientId": "mcp-client-cli",
-        "callbackPort": 19876
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gateway.orchestrator.lab/mcp",
+        "3334",
+        "--transport", "http-only",
+        "--static-oauth-client-info",
+        "{\"client_id\":\"mcp-client-cli\"}"
+      ],
+      "env": {
+        "NODE_EXTRA_CA_CERTS": "/path/to/connect-claude-to-maverics/certs/rootCA.pem"
       }
     }
   }
 }
-EOF
 ```
+
+> **Note:** Update the `NODE_EXTRA_CA_CERTS` path to point to the `certs/rootCA.pem` in your clone of this repository. This is required because the lab uses locally-generated TLS certificates.
+
+Restart Claude Desktop after saving the file.
 
 When prompted, authenticate as one of the test users below.
 

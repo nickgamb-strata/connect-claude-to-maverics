@@ -96,6 +96,8 @@ apps:
     redirectURLs:
       - http://localhost:19876/callback
       - http://127.0.0.1:19876/callback
+      - http://localhost:3334/oauth/callback
+      - http://127.0.0.1:3334/oauth/callback
     authentication:
       idps:
         - keycloak
