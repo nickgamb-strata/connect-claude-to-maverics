@@ -155,3 +155,16 @@ Want to build this example from scratch instead of cloning it? Follow the Strata
 | OAuth redirect mismatch | Ensure `--callback-port 19876` matches the `redirectURLs` in the OIDC Provider config |
 | TLS certificate errors | Run `make init` again to regenerate certs |
 | Containers won't start | Check `MAVERICS_IMAGE` in `.env` matches your loaded image tag |
+| OAuth callback fails in Claude Desktop | Run `./reset-demo.sh` and restart Claude Desktop (see below) |
+
+### Resetting OAuth State (Claude Desktop)
+
+Claude Desktop can occasionally spawn multiple `mcp-remote` instances during startup, which creates parallel OAuth flows that race against each other. This can cause PKCE verification failures at the Keycloak callback or session timeouts.
+
+If the OAuth login page opens but the callback redirect fails, run the reset script:
+
+```bash
+./reset-demo.sh
+```
+
+This kills any stale `mcp-remote` processes and clears the cached OAuth tokens. After running it, restart Claude Desktop — a fresh browser window will open for authentication.
