@@ -54,9 +54,14 @@ cat > "/Users/nickgamb/Library/Application Support/Claude/claude_desktop_config.
     "ai-identity-gateway": {
       "type": "http",
       "url": "https://gateway.orchestrator.lab/mcp",
-      "clientId": "mcp-client-cli",
-      "callbackPort": 19876
+      "oauth": {
+        "clientId": "mcp-client-cli",
+        "callbackPort": 19876
+      }
     }
+  }
+}
+EOF
 ```
 
 When prompted, authenticate as one of the test users below.
