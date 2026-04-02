@@ -2,7 +2,7 @@
 
 A self-contained example of the Maverics AI Identity Gateway protecting MCP servers with OAuth 2.0 identity governance. One command to start. Connect Claude in 60 seconds.
 
-Companion to: [Your MCP Server Is a Resource Server Now. Act Like It.](../blog.md)
+Companion to: **Your MCP Server Is a Resource Server Now. Act Like It.** (Strata blog)
 
 ## Prerequisites
 
@@ -49,6 +49,8 @@ If you use Claude Desktop, add the MCP gateway using `mcp-remote`. First, open y
 **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
 Then add the following to the `mcpServers` object:
+
+> **Note:** The `npx` path below is for Apple Silicon Macs with Homebrew. On Intel Macs use `/usr/local/bin/npx`. On Linux, use `npx` (from PATH) or run `which npx` to find the absolute path.
 
 ```json
 {
@@ -156,6 +158,30 @@ Want to build this example from scratch instead of cloning it? Follow the Strata
 | TLS certificate errors | Run `make init` again to regenerate certs |
 | Containers won't start | Check `MAVERICS_IMAGE` in `.env` matches your loaded image tag |
 | OAuth callback fails in Claude Desktop | Run `./reset-demo.sh` and restart Claude Desktop (see below) |
+
+## View the Audit Trail
+
+Once Claude is connected and making tool calls, you can see the full identity chain in real time:
+
+```bash
+# AI Identity Gateway — token validation, OPA policy decisions, token exchange
+docker compose logs -f ai-identity-gateway
+
+# Enterprise Ledger — tool calls with subject, actor chain, scopes, and TTL
+docker compose logs -f enterprise-ledger
+
+# OIDC Provider — token issuance and exchange
+docker compose logs -f oidc-provider
+
+# All services at once
+make logs
+```
+
+Look for log entries showing:
+- **`successfully validated access token`** — inbound token verified (subject, audience, issuer)
+- **`successfully completed token exchange`** — RFC 8693 delegation token minted with `actor: ai-identity-gateway`
+- **`tool called`** — downstream tool invocation with subject, scopes, and actor chain
+- **`SENSITIVE DATA ACCESSED`** — PII or audit log access (when elevated scopes are granted)
 
 ### Resetting OAuth State (Claude Desktop)
 
