@@ -4,6 +4,10 @@ A self-contained example of the Maverics AI Identity Gateway protecting MCP serv
 
 Companion to: [Your MCP Server Is a Resource Server Now. Act Like It.](../blog.md)
 
+## Security Notice
+
+This repository is a **self-contained demo environment** for local use only. Hardcoded passwords, client secrets, and Vault dev tokens in `docker-compose.yml`, `secrets.yaml`, and `keycloak/blueprints-realm.json` are intentional for quick setup — they are not real credentials and carry no risk. In production, secrets are managed via HashiCorp Vault, cloud KMS, or equivalent. Never commit real secrets to version control.
+
 ## Prerequisites
 
 - Docker Desktop (or Docker Engine + Compose v2)
