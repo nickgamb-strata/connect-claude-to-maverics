@@ -33,7 +33,15 @@ make smoke-test
 
 ## Connect Claude Code
 
-If you use Claude Code, add the example MCP using the following command:
+The lab uses locally-generated TLS certificates. Before connecting Claude Code, tell Node.js to trust the local CA:
+
+```bash
+export NODE_EXTRA_CA_CERTS=/path/to/connect-claude-to-maverics/certs/rootCA.pem
+```
+
+> **Tip:** Add this to your `~/.zshrc` (or `~/.bashrc`) so it persists across terminal sessions.
+
+Then add the MCP server:
 
 ```bash
 claude mcp add --transport http \
